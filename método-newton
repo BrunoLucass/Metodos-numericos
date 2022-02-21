@@ -1,0 +1,27 @@
+import math
+# definindo aproximacao inicial
+x0 = float(input("digite o valor de aproximacao inicial (x0) "))
+# Inicializacao do contador de iteracoes
+contador = 1
+# definir criterios de parada / erro
+erro = 0.000001
+numi = 10
+x = 0.0
+# definir aqui a funcao
+def f(x):
+ return (x * math.e ** (0.5*x) + 1.2 * x - 5)
+# definir a derivada da funcao ( precisa ser inicializada depois da funcao f)
+def derif(x):
+ return ((f(x + erro) - f(x)) / erro)
+# Inicio do loop de iteracoes
+while(math.fabs(f(x0)) > erro):
+ # calculo da derivada
+ x = x0 - f(x0) / derif(x0)
+ x0 = x
+ contador = contador + 1
+ if(contador > numi):
+ print("A raiz final nao pode ser encontrada")
+ break
+ else:
+ print("Iteracao de numero " + str(contador) + "\nRaiz(x0) " +
+ str(x0) + "\nF(x0) " + str(f(x0)) + "\n"
