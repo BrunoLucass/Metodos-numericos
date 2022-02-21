@@ -1,0 +1,36 @@
+# biblioteca necessaria para calculos matematicos
+import math
+# definiçao das variaveis
+# decifinir aqui o intervalo pelos valores de A e B
+a = float(input("digite o valor de a "))
+b = float(input("digite o valor de b "))
+# a e b precisam ter sinais opostos, ou seja f(a)*f(b) < 0
+# definindo tolerancias / criterio de parada
+n = 10
+erro = 0.000001
+# inicializacao do contador de iteracoes
+contador = 0
+x0 = (a + b) / 2.0 # calculo do ponto medio
+# aqui sera definida a funçao
+def f(x):
+ return (x * math.e ** (0.5*x) + 1.2 * x - 5)
+# enquanto a amplitude maxima nao for atingida, o while continua a ser 
+executado (baseado no slide de bissecao)
+while(math.fabs(f(x0)) > erro):
+ if(f(a) * f(x0) < 0.0):
+ b = x0
+ else:
+ a = x0
+ # para cada vez que o while é executado, o ponto medio chega mais proximo 
+do valor desejado
+ x0 = (a + b) / 2.0
+ # contandor de numero de iteracoes
+ contador = contador + 1
+ # observacao na atividade foi pedido o print de xi e f(xi), porem como foi 
+baseado no slide preferimos deixar x0
+ print("Iteracao de numero " + str(contador) + "\nValores do intervalo a e b " + 
+str(a) + " e " + str(b) +
+ "\nValores de f(a) e f(b) " + str(f(a)) + " e " + str(f(b)) + "\nRaiz(x0) " + 
+str(x0) + "\nF(x0) " + str(f(x0)) + "\n")
+ if(contador >= n):
+ break
