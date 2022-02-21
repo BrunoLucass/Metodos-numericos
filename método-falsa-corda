@@ -1,0 +1,31 @@
+# biblioteca necessaria para calculos matematicos
+import math
+# definir aqui os valores de A e B
+a = float(input("digite o valor de a "))
+b = float(input("digite o valor de b "))
+# definir a tolerancia / criterio de parada
+numi = 10
+erro = 0.000001
+# inicializacao do contador de iteracoes
+contador = 0
+# aqui sera definida a função
+def f(x):
+ return (x * math.e ** (0.5*x) + 1.2 * x - 5)
+# definir x0 ( nesse metodo ele precisa ficar depois da declaracao da funcao)
+x0 = (a * f(b) - b * f(a)) / (f(b) - f(a))
+# comeco do loop de iteracoes
+# observacao definimos o xi como x0 pois foi baseado no slide e no metodo da 
+bissecao
+while(math.fabs(f(x0)) > erro):
+ if(f(a) * f(x0) < 0.0):
+ b = x0
+ else:
+ a = x0
+ x0 = ((a * f(b) - b * f(a)) / (f(b) - f(a)))
+ contador = contador + 1
+ print("Iteracao de numero " + str(contador) + "\nValores do intervalo a e b " + 
+str(a) + " e " + str(b) +
+ "\nValores de f(a) e f(b) " + str(f(a)) + " e " + str(f(b)) + "\nRaiz(x0) " + 
+str(x0) + "\nF(x0) " + str(f(x0)) + "\n")
+ if(contador >= numi):
+ break
