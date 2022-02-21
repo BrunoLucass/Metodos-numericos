@@ -1,0 +1,35 @@
+#bibliotecas necessarias
+import numpy as np
+import sys
+n = int(input('Digite o tamanho do sistema: '))
+# inicialização dos arrays
+# array a vai conter a matriz do sistema linear
+a = np.zeros((n,n+1))
+# array b vai conter os resultados de X (x1, x2, etc...)
+x = np.zeros(n)
+print('Observaçao - após os números da linha da matriz, é necessário colocar os 
+resultados\n')
+print('Digite os números da matriz:')
+for i in range(n):
+ for j in range(n+1):
+ a[i][j] = float(input( 'A['+str(i)+']['+ str(j)+']=')) # leitura da matriz
+for i in range(n):
+ # caso alguma das costante de resultado seja = 0, o sistema para
+ if a[i][i] == 0.0:
+ sys.exit('Divisão por zero')
+ # metodo de gauss
+ for j in range(i+1, n):
+ divisoes = a[j][i]/a[i][i]
+ for k in range(n+1):
+ a[j][k] = a[j][k] - divisoes * a[i][k]
+ # print matriz triangulada
+ print(a[j][k])
+x[n-1] = a[n-1][n]/a[n-1][n-1]
+for i in range(n-2,-1,-1):
+ x[i] = a[i][n]
+ for j in range(i+1,n):
+ x[i] = x[i] - a[i][j]*x[j]
+ x[i] = x[i]/a[i][i]
+print('\nResultado:\n ')
+for i in range(n):
+ print('X%d = %0.3f' %(i+1,x[i]))
