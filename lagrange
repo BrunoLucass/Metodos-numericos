@@ -1,0 +1,24 @@
+# Importação da biblioteca necessária para rodar o código
+import numpy as np
+n = int(input('Digite o número de pontos a serem interpolados -> '))
+# Inicialização dos arrays que vão armazenar os valores x e f(x)
+x = np.zeros((n))
+y = np.zeros((n))
+# Leitura dos valores de x e F(x) // y
+print('Digite os valores de x e f(x): ')
+for i in range(n):
+ x[i] = float(input( 'x['+str(i)+']='))
+ y[i] = float(input( 'F(x)['+str(i)+']='))
+# Leitura do ponto de interpolação x que será descoberto
+ptx = float(input('Digite o ponto a ser interpolado (x) -> '))
+# Variável que armazena o valor interpolado final
+pty = 0
+# Começo do metodo de lagrange
+for i in range(n):
+ aux = 1
+ for j in range(n):
+ if i != j:
+ aux = aux * (ptx - x[j])/(x[i] - x[j])
+ pty = pty + aux * y[i]
+# Fim do metodo de lagrange
+print(f'Valor da interpolação no ponto {ptx} é {pty}.')
