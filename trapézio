@@ -1,0 +1,20 @@
+# Biblioteca necessária para os cálculos matemáticos
+import math
+def mTrapezio (f, a, b, n):
+ # metodo do trapézio para aproximar as integrais
+ h = (b - a) / n 
+ sum = 0
+ for i in range(1, n):
+ sum = sum + f(a + i * h)
+ sum = sum * 2
+ sum = sum + (f(a) + f(b))
+ return (h / 2) * sum
+def f(x):
+ return math.sqrt(x + 1)
+# Definição dos limites
+a = float(input('Digite o valor do limite inferior ->'))
+b = float(input('Digite o valor do limite superior ->'))
+# Janela de n = 20
+n = 20
+integralFinal = mTrapezio(f, a, b, n)
+print(f'Resultado final da integral é aproximadamente {integralFinal}')
