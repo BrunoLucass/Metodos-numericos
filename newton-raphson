@@ -1,0 +1,34 @@
+# Importação da biblioteca necessária para rodar o código
+import numpy as np
+nps = int(input('Quantidade pontos a serem interpolados-> '))
+# Inicialização dos arrays que irão armazenar x e f(x)
+arrx = np.zeros((nps))
+arry = np.zeros((nps))
+tabela = []
+for i in range(nps):
+ arrx[i] = float(input('x['+str(i)+']='))
+ arry[i] = float(input('F(x)['+str(i)+']='))
+tabela.append(arry)
+print()
+x = float(input('Ponto x pra descobrir -> '))
+print()
+# Parte da diferença dividida
+passo = 1
+for n in range(nps - 1):
+ ordem = []
+ for m in range(len(tabela[n]) - 1):
+ dif_dividida = (tabela[n][m+1] - tabela[n][m])/(arrx[m+passo] - arrx[m])
+ ordem.append(dif_dividida)
+ tabela.append(ordem)
+ passo += 1
+for k in range(len(tabela)):
+ print(f'Ordem: {k}, {tabela[k]}\n')
+aprox = 0
+grau = 0
+for i in range(len(tabela)):
+ fator = tabela[i][0]
+ for j in range(grau):
+ fator *= (x - arrx[j])
+ grau += 1
+ aprox += fator
+print(f'Valor da interpolação no ponto {x} é {aprox}.')
